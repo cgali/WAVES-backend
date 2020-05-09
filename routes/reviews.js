@@ -33,8 +33,6 @@ router.put('/', (req, res, next) => {
 		.catch(next);
 });
 
-
-
 // DELETE /reviews-list/:id delete page
 router.put('/:id', async (req, res, next) => {
 	const { id } = req.params;

@@ -27,16 +27,21 @@ router.get('/:id', async (req, res, next) => {
 });
 
 // POST /beach-list add review
-router.post('/', (req, res, next) => {
+router.post('/:id/add-review', async (req, res, next) => {
 	const { id } = req.params;
 	const { title, description } = req.body;
-	Beach.findById(id)
-		.then(beach => {
-			beach.reviews.push(title, description);
-			beach.save();
-			res.status(200).json(reviewUpdated);
-		})
-		.catch(next);
+	try {
+		const addReview = await Beach.findByIdAndUpdate(
+			id,
+			{
+				$push: { reviews: { title, description } },
+			},
+			{ new: true }
+		);
+		res.status(200).json(addReview);
+	} catch (error) {
+		next(error);
+	}
 });
 
 module.exports = router;
