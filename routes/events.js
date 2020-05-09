@@ -26,6 +26,28 @@ router.get('/:id', async (req, res, next) => {
 	}
 });
 
+// POST /events-list add review
+router.post('/:id/add-review', async (req, res, next) => {
+	const { id } = req.params;
+	const { title, description } = req.body;
+	const username = req.session.currentUser.name;
+	const userSurname = req.session.currentUser.surname;
+	// eslint-disable-next-line no-underscore-dangle
+	const userId = req.session.currentUser._id;
+	try {
+		const addReview = await Event.findByIdAndUpdate(
+			id,
+			{
+				$push: { reviews: { title, description, username, userSurname, userId } },
+			},
+			{ new: true }
+		);
+		res.status(200).json(addReview);
+	} catch (error) {
+		next(error);
+	}
+});
+
 // POST /events-list create page
 router.post('/', async (req, res, next) => {
 	const { image, title, beach, date, type, description } = req.body;
