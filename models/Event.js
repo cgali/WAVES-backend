@@ -16,6 +16,7 @@ const eventSchema = new Schema(
 		type: { type: String },
 		description: { type: String },
 		participants: { type: Array },
+		reviews: { type: Array },
 	},
 
 	{

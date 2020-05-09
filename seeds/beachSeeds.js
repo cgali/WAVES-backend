@@ -31,6 +31,7 @@ const beaches = [
 		waveRate: ['4'],
 		backgroundRate: ['3'],
 		socialEnvironmentRate: ['2'],
+		reviews: [],
 	},
 	{
 		name: 'Cabrera de Mar',
@@ -43,6 +44,7 @@ const beaches = [
 		waveRate: ['2'],
 		backgroundRate: ['4'],
 		socialEnvironmentRate: ['2'],
+		reviews: [],
 	},
 	{
 		name: 'El Masnou',
@@ -55,6 +57,7 @@ const beaches = [
 		waveRate: ['4'],
 		backgroundRate: ['2'],
 		socialEnvironmentRate: ['4'],
+		reviews: [],
 	},
 	{
 		name: 'Montgat',
@@ -67,6 +70,7 @@ const beaches = [
 		waveRate: ['3'],
 		backgroundRate: ['2'],
 		socialEnvironmentRate: ['2'],
+		reviews: [],
 	},
 	{
 		name: 'Ocata',
@@ -79,6 +83,7 @@ const beaches = [
 		waveRate: ['4'],
 		backgroundRate: ['2'],
 		socialEnvironmentRate: ['3'],
+		reviews: [],
 	},
 	{
 		name: 'Palamós',
@@ -91,6 +96,7 @@ const beaches = [
 		waveRate: ['3'],
 		backgroundRate: ['2'],
 		socialEnvironmentRate: ['2'],
+		reviews: [],
 	},
 	{
 		name: 'Salou',
@@ -103,6 +109,7 @@ const beaches = [
 		waveRate: ['3'],
 		backgroundRate: ['3'],
 		socialEnvironmentRate: ['3'],
+		reviews: [],
 	},
 	{
 		name: 'Sitges',
@@ -115,6 +122,7 @@ const beaches = [
 		waveRate: ['2'],
 		backgroundRate: ['3'],
 		socialEnvironmentRate: ['4'],
+		reviews: [],
 	},
 	{
 		name: 'Vilassar de Mar',
@@ -127,6 +135,7 @@ const beaches = [
 		waveRate: ['3'],
 		backgroundRate: ['2'],
 		socialEnvironmentRate: ['2'],
+		reviews: [],
 	},
 ];
 

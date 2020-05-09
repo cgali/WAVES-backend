@@ -3,7 +3,7 @@ const Beach = require('../models/Beach');
 
 const router = express.Router();
 
-// GET /surfers-list page.
+// GET /beaches-list page.
 router.get('/', async (req, res, next) => {
 	try {
 		const beaches = await Beach.find();
@@ -14,16 +14,29 @@ router.get('/', async (req, res, next) => {
 	}
 });
 
-// GET /surfers-list/:id page.
+// GET /beaches-list/:id page.
 router.get('/:id', async (req, res, next) => {
 	const { id } = req.params;
 	try {
-		const beach = Beach.findById(id);
+		const beach = await Beach.findById(id);
 		console.log(beach);
 		res.status(200).json({ beach });
 	} catch (err) {
 		next(console.log('Error while listing the beach: ', err));
 	}
+});
+
+// POST /beach-list add review
+router.post('/', (req, res, next) => {
+	const { id } = req.params;
+	const { title, description } = req.body;
+	Beach.findById(id)
+		.then(beach => {
+			beach.reviews.push(title, description);
+			beach.save();
+			res.status(200).json(reviewUpdated);
+		})
+		.catch(next);
 });
 
 module.exports = router;

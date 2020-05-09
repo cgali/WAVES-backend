@@ -29,7 +29,7 @@ const surfersRouter = require('./routes/surfers');
 const profileRouter = require('./routes/profile');
 const beachesRouter = require('./routes/beaches');
 const eventsRouter = require('./routes/events');
-const reviewsRouter = require('./routes/reviews');
+// const reviewsRouter = require('./routes/reviews');
 const demoRouter = require('./routes/demo');
 
 const app = express();
@@ -65,9 +65,9 @@ app.use('/', authRouter);
 app.use('/protected', demoRouter);
 app.use('/surfers-list', surfersRouter);
 app.use('/profile', profileRouter);
-// app.use('/beaches-list', beachesRouter);
-// app.use('/events-list', eventsRouter);
-// app.use('/review-list', reviewsRouter);
+app.use('/beaches-list', beachesRouter);
+app.use('/events-list', eventsRouter);
+// app.use('/reviews-list', reviewsRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res) => {

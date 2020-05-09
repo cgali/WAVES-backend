@@ -13,6 +13,7 @@ const beachSchema = new Schema(
 		waveRate: { type: Array },
 		backgroundRate: { type: Array },
 		socialEnvironmentRate: { type: Array },
+		reviews: { type: Array },
 	},
 
 	{

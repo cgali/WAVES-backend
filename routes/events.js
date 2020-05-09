@@ -18,7 +18,7 @@ router.get('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
 	const { id } = req.params;
 	try {
-		const event = Event.findById(id);
+		const event = await Event.findById(id);
 		console.log('listing events', event);
 		res.status(200).json({ event });
 	} catch (err) {
@@ -26,8 +26,25 @@ router.get('/:id', async (req, res, next) => {
 	}
 });
 
+// POST /events-list create page
+router.post('/', async (req, res, next) => {
+	const { image, title, beach, date, type, description } = req.body;
+	try {
+		const createEvent = await Event.create({
+			image,
+			title,
+			beach,
+			date,
+			type,
+			description,
+		});
+		res.status(201).json(createEvent);
+	} catch (err) {
+		next(console.log('Error while creating the event: ', err));
+	}
+});
 
-// PUT /events-list page.
+// PUT /events-list update page.
 router.put('/', (req, res, next) => {
 	const { id } = req.params;
 	const { image, title, beach, date, type, description } = req.body;
@@ -47,6 +64,17 @@ router.put('/', (req, res, next) => {
 			}
 		})
 		.catch(next);
+});
+
+// DELETE /events-list/:id delete page
+router.delete('/:id', async (req, res, next) => {
+	const { id } = req.params;
+	try {
+		const event = await Event.findByIdAndDelete(id);
+		res.status(200).json(event);
+	} catch (error) {
+		next(error);
+	}
 });
 
 module.exports = router;

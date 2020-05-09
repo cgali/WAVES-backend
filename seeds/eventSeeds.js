@@ -30,6 +30,7 @@ const events = [
 		type: 'training',
 		description: 'Training the strength and intensity of the paddle. Adapted to the level of every participant',
 		participants: ['Kelly Slater', 'Mariona Ruiz', 'Johao Pereira'],
+		reviews: [],
 	},
 	{
 		user_id: '5eb5741d58ec0a08eb7206cf',
@@ -41,6 +42,7 @@ const events = [
 		description:
 			'The first championship made in Barcelona. It is not necessary to have a good level, only bring your passion to surf and enjoy a day with other surfer and companions.',
 		participants: ['Kelly Slater', 'John John Florence', 'Stephanie Gilmore', 'Bethanie Monroe'],
+		reviews: [],
 	},
 	{
 		user_id: '5eb5741d58ec0a08eb7206d1',
@@ -52,6 +54,7 @@ const events = [
 		description:
 			'It is the day to share with your dog a surfing day. Come with your dog and stay with other surfers dogs.',
 		participants: ['James Jackson', 'Mariona Ruiz', 'Lisa Shutter'],
+		reviews: [],
 	},
 ];
 

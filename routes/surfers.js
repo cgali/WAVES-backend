@@ -18,11 +18,11 @@ router.get('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
 	const { id } = req.params;
 	try {
-		const surfer = User.findById(id);
+		const surfer = await User.findById(id);
 		console.log(surfer);
 		res.status(200).json({ surfer });
 	} catch (err) {
-		next(console.log('Error while listing surfers: ', err));
+		next(console.log('Error while listing surfer: ', err));
 	}
 });
 
