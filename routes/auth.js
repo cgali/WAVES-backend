@@ -9,7 +9,7 @@ const bcryptSalt = 10;
 
 const router = express.Router();
 
-router.get('/whoami', (req, res, next) => {
+router.get('/whoami', (req, res) => {
 	if (req.session.currentUser) {
 		res.status(200).json(req.session.currentUser);
 	} else {
@@ -17,18 +17,19 @@ router.get('/whoami', (req, res, next) => {
 	}
 });
 
+// eslint-disable-next-line consistent-return
 router.post('/signup', checkUsernameAndPasswordNotEmpty, async (req, res, next) => {
-	const { username, password } = res.locals.auth;
+	const { email, password } = res.locals.auth;
 	try {
-		const user = await User.findOne({ username });
+		const user = await User.findOne({ email });
 		if (user) {
-			return res.status(422).json({ code: 'username-not-unique' });
+			return res.status(422).json({ code: 'email-not-unique' });
 		}
 
 		const salt = bcrypt.genSaltSync(bcryptSalt);
 		const hashedPassword = bcrypt.hashSync(password, salt);
 
-		const newUser = await User.create({ username, hashedPassword });
+		const newUser = await User.create({ email, hashedPassword });
 		req.session.currentUser = newUser;
 		return res.json(newUser);
 	} catch (error) {
@@ -36,10 +37,11 @@ router.post('/signup', checkUsernameAndPasswordNotEmpty, async (req, res, next) 
 	}
 });
 
+// eslint-disable-next-line consistent-return
 router.post('/login', checkUsernameAndPasswordNotEmpty, async (req, res, next) => {
-	const { username, password } = res.locals.auth;
+	const { email, password } = res.locals.auth;
 	try {
-		const user = await User.findOne({ username });
+		const user = await User.findOne({ email });
 		if (!user) {
 			return res.status(404).json({ code: 'not-found' });
 		}

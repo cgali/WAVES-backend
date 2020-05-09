@@ -4,9 +4,23 @@ const { Schema } = mongoose;
 
 const userSchema = new Schema(
 	{
-		username: { type: String, required: true, unique: true },
+		name: { type: String },
+		surname: { type: String },
+		email: {
+			type: String,
+			required: true,
+			unique: true,
+		},
 		hashedPassword: { type: String, required: true },
+		image: { type: String },
+		favoriteBoard: { type: String },
+		level: { type: String },
+		typeOfWaves: { type: Array },
+		frequentsBeaches: { type: Array },
+		myEvents: { type: Array },
+		events: { type: Array },
 	},
+
 	{
 		timestamps: {
 			createdAt: 'created_at',

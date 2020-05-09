@@ -57,13 +57,13 @@ I'm always searching for the conditions of waves and seeing a lot of app I'm the
 | Method | Path      | Description    | Body                     |
 | :----: | --------- | -------------- | ------------------------ |
 |  GET   | `/profile` | Go to your profile      |                          |
-|  PUT  | `/profile` | Update your profile  | `{ image, email, username, level, board { type, size }, typesOfWaves, frequentsBeaches}]` |
+|  PUT  | `/profile` | Update your profile  | `{ image, email, username, level, favoriteBoard, typesOfWaves, frequentsBeaches, myEvents, events}` |
 
 ### *Surfers endpoints*
 | Method | Path      | Description    | Body                     |
 | :----: | --------- | -------------- | ------------------------ |
-|  GET   | `/surfer-list` | Obtain all the surfer’s profile       |  |
-|  GET  | `/surfer-list/:id` | Obtain specific info of a surfer  |  |
+|  GET   | `/surfers-list` | Obtain all the surfer’s profile       |  |
+|  GET  | `/surfers-list/:id` | Obtain specific info of a surfer  |  |
 
 ### *Events endpoints*
 | Method | Path      | Description    | Body                     |
@@ -116,7 +116,6 @@ I'm always searching for the conditions of waves and seeing a lot of app I'm the
 {
 	name: String;
 	image: String;
-	title: String;
   	typesOfWaves: Array;
 	beachBackground: Array;
 	socialEnvironment: String;
@@ -132,10 +131,10 @@ I'm always searching for the conditions of waves and seeing a lot of app I'm the
 
 ```
 {
-	owner: ObjectId<User>;
+	user_id: ObjectId<User>;
 	title: String;
 	beach: String;
-	date: String;
+	date: Date;
 	type: Array;
 	description: String;
 	participants: Array;
@@ -150,12 +149,9 @@ I'm always searching for the conditions of waves and seeing a lot of app I'm the
 
 ```
 {
-	owner: ObjectId<User>;
+	user_id: ObjectId<User>;
 	title: String;
-	beach: String;
-	Date: String;
 	description: String;
-	participants: Array;
 	timestamps: {
       		createdAt: 'created_at',
      		updatedAt: 'updated_at',
@@ -172,8 +168,8 @@ I'm always searching for the conditions of waves and seeing a lot of app I'm the
 ### *Git*
 The url to the repository and to the deployed project.
 
-https://github.com/cgali/WAVE-frontend
-https://github.com/cgali/WAVE-backend
+https://github.com/cgali/WAVES-frontend
+https://github.com/cgali/WAVES-backend
 
 [Deploy Link](http://heroku.com/)
 
