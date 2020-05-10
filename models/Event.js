@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const reviewSchema = require('./Review');
 
 const { Schema } = mongoose;
 
@@ -15,8 +16,8 @@ const eventSchema = new Schema(
 		date: { type: Date },
 		type: { type: String },
 		description: { type: String },
-		participants: { type: Array },
-		reviews: { type: Array },
+		participants: { type: Schema.Types.ObjectId, ref: 'User' },
+		// reviews: reviewSchema,
 	},
 
 	{

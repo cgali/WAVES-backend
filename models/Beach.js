@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const reviewSchema = require('./Review');
 
 const { Schema } = mongoose;
 
@@ -13,7 +14,7 @@ const beachSchema = new Schema(
 		waveRate: { type: Array },
 		backgroundRate: { type: Array },
 		socialEnvironmentRate: { type: Array },
-		reviews: { type: Array },
+		reviews: reviewSchema,
 	},
 
 	{
