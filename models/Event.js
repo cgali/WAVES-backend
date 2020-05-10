@@ -17,7 +17,7 @@ const eventSchema = new Schema(
 		type: { type: String },
 		description: { type: String },
 		participants: { type: Schema.Types.ObjectId, ref: 'User' },
-		// reviews: reviewSchema,
+		reviews: [reviewSchema],
 	},
 
 	{

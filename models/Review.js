@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 const reviewSchema = new Schema(
 	{
-		user: { type: Schema.Types.ObjectId, ref: 'User' },
+		owner: { type: Schema.Types.ObjectId, ref: 'User' },
 		title: { type: String },
 		description: { type: String },
 	},
@@ -17,6 +17,4 @@ const reviewSchema = new Schema(
 	}
 );
 
-const Review = mongoose.model('Review', reviewSchema);
-
-module.exports = Review;
+module.exports = reviewSchema;
