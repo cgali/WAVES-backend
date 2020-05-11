@@ -19,7 +19,7 @@ router.get('/:id', async (req, res, next) => {
 	const { id } = req.params;
 	try {
 		const beach = await Beach.findById(id);
-		console.log(beach);
+		console.log('RATE:', beach.rate.waveRate);
 		res.status(200).json({ beach });
 	} catch (err) {
 		next(console.log('Error while listing the beach: ', err));
@@ -74,6 +74,27 @@ router.post('/:id/delete/:_id', async (req, res, next) => {
 			$pull: { reviews: { _id } },
 		});
 		res.status(200).json(deleteReview);
+	} catch (error) {
+		next(error);
+	}
+});
+
+// POST /beach-list   ADD RATE
+router.post('/:id/add-rate', async (req, res, next) => {
+	const { id } = req.params;
+	const { waveRate, backgroundRate, socialEnvironmentRate } = req.body;
+	// eslint-disable-next-line no-underscore-dangle
+	const owner = req.session.currentUser._id;
+	try {
+		const addRate = await Beach.findByIdAndUpdate(id, {
+			$push: {
+				'rate.owner': owner,
+				'rate.waveRate': waveRate,
+				'rate.backgroundRate': backgroundRate,
+				'rate.socialEnvironmentRate': socialEnvironmentRate,
+			},
+		});
+		res.status(200).json(addRate);
 	} catch (error) {
 		next(error);
 	}

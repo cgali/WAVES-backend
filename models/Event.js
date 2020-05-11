@@ -16,7 +16,7 @@ const eventSchema = new Schema(
 		date: { type: Date },
 		type: { type: String },
 		description: { type: String },
-		participants: { type: Schema.Types.ObjectId, ref: 'User' },
+		participants: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 		reviews: [reviewSchema],
 	},
 

@@ -29,7 +29,7 @@ const events = [
 		date: '2020-08-24',
 		type: 'training',
 		description: 'Training the strength and intensity of the paddle. Adapted to the level of every participant',
-		participants: ['Kelly Slater', 'Mariona Ruiz', 'Johao Pereira'],
+		participants: ['5eb5741d58ec0a08eb7206d0', '5eb5741d58ec0a08eb7206d2', '5eb5741d58ec0a08eb7206ce'],
 		reviews: [],
 	},
 	{
@@ -41,7 +41,12 @@ const events = [
 		type: 'competition',
 		description:
 			'The first championship made in Barcelona. It is not necessary to have a good level, only bring your passion to surf and enjoy a day with other surfer and companions.',
-		participants: ['Kelly Slater', 'John John Florence', 'Stephanie Gilmore', 'Bethanie Monroe'],
+		participants: [
+			'5eb5741d58ec0a08eb7206d0',
+			'5eb5741d58ec0a08eb7206cf',
+			'5eb5741d58ec0a08eb7206d4',
+			'5eb5741d58ec0a08eb7206cc',
+		],
 		reviews: [],
 	},
 	{
@@ -53,7 +58,7 @@ const events = [
 		type: 'others',
 		description:
 			'It is the day to share with your dog a surfing day. Come with your dog and stay with other surfers dogs.',
-		participants: ['James Jackson', 'Mariona Ruiz', 'Lisa Shutter'],
+		participants: ['5eb5741d58ec0a08eb7206cd', '5eb5741d58ec0a08eb7206cf', '5eb5741d58ec0a08eb7206d1'],
 		reviews: [],
 	},
 ];

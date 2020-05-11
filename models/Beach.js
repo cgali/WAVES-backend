@@ -11,9 +11,12 @@ const beachSchema = new Schema(
 		beachBackground: { type: Array },
 		socialEnvironment: { type: String },
 		description: { type: String },
-		waveRate: { type: Array },
-		backgroundRate: { type: Array },
-		socialEnvironmentRate: { type: Array },
+		rate: {
+			owner: [{ type: Schema.Types.ObjectId, ref: 'User', unique: true }],
+			waveRate: { type: Array },
+			backgroundRate: { type: Array },
+			socialEnvironmentRate: { type: Array },
+		},
 		reviews: [reviewSchema],
 	},
 
