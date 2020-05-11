@@ -30,19 +30,31 @@ router.get('/:id', async (req, res, next) => {
 router.post('/:id/add-review', async (req, res, next) => {
 	const { id } = req.params;
 	const { title, description } = req.body;
-	const username = req.session.currentUser.name;
-	const userSurname = req.session.currentUser.surname;
 	// eslint-disable-next-line no-underscore-dangle
-	const userId = req.session.currentUser._id;
+	const owner = req.session.currentUser._id;
 	try {
 		const addReview = await Beach.findByIdAndUpdate(
 			id,
 			{
-				$push: { reviews: { title, description, username, userSurname, userId } },
+				$push: { reviews: { owner, title, description } },
 			},
 			{ new: true }
 		);
 		res.status(200).json(addReview);
+	} catch (error) {
+		next(error);
+	}
+});
+
+// POST /beaches-list/:id/delete/:_id  delete-review
+router.post('/:id/delete/:_id', async (req, res, next) => {
+	const { id, _id } = req.params;
+	console.log('ID OF EVENT:', id, 'ID OF REVIEW:', _id);
+	try {
+		const findEvent = await Beach.findByIdAndUpdate(id, {
+			$pull: { reviews: { _id } },
+		});
+		res.status(200).json(findEvent);
 	} catch (error) {
 		next(error);
 	}

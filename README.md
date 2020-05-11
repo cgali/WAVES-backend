@@ -171,7 +171,8 @@ The url to the repository and to the deployed project.
 https://github.com/cgali/WAVES-frontend
 https://github.com/cgali/WAVES-backend
 
-[Deploy Link](http://heroku.com/)
+### *Deploy link*
+(https://waves-project-app.herokuapp.com/)
 
 ### *Slides*
 [Slides Link](http://slides.com/)

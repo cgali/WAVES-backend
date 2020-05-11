@@ -26,23 +26,50 @@ router.get('/:id', async (req, res, next) => {
 	}
 });
 
-// POST /events-list add review
+// POST /events-list/:id/add-review
 router.post('/:id/add-review', async (req, res, next) => {
 	const { id } = req.params;
 	const { title, description } = req.body;
-	const username = req.session.currentUser.name;
-	const userSurname = req.session.currentUser.surname;
 	// eslint-disable-next-line no-underscore-dangle
-	const userId = req.session.currentUser._id;
+	const owner = req.session.currentUser._id;
 	try {
 		const addReview = await Event.findByIdAndUpdate(
 			id,
 			{
-				$push: { reviews: { title, description, username, userSurname, userId } },
+				$push: { reviews: { owner, title, description } },
 			},
 			{ new: true }
 		);
 		res.status(200).json(addReview);
+	} catch (error) {
+		next(error);
+	}
+});
+
+// DELETE /events-list/:id/add-review
+// router.delete('/:id/delete/:_id', async (req, res, next) => {
+// 	const { id, _id } = req.params;
+// 	console.log('ID OF EVENT:', id, 'ID OF REVIEW:', _id);
+// 	try {
+// 		const findEvent = await Event.findById(id);
+// 		console.log(findEvent);
+// 		const deleteReview = await findEvent.reviews.pull(_id);
+// 		// Event.save();
+// 		res.status(200).json(deleteReview);
+// 	} catch (error) {
+// 		next(error);
+// 	}
+// });
+
+// POST /events-list/:id/delete/:_id  delete-review
+router.post('/:id/delete/:_id', async (req, res, next) => {
+	const { id, _id } = req.params;
+	console.log('ID OF EVENT:', id, 'ID OF REVIEW:', _id);
+	try {
+		const findEvent = await Event.findByIdAndUpdate(id, {
+			$pull: { reviews: { _id } },
+		});
+		res.status(200).json(findEvent);
 	} catch (error) {
 		next(error);
 	}
