@@ -5,7 +5,7 @@ const { Schema } = mongoose;
 
 const eventSchema = new Schema(
 	{
-		user_id: { type: Schema.Types.ObjectId, ref: 'User' },
+		owner: { type: Schema.Types.ObjectId, ref: 'User' },
 		image: { type: String },
 		title: {
 			type: String,

@@ -3,7 +3,7 @@ const Beach = require('../models/Beach');
 
 const router = express.Router();
 
-// GET /beaches-list page.
+// GET /beaches-list   BEACHES LIST
 router.get('/', async (req, res, next) => {
 	try {
 		const beaches = await Beach.find();
@@ -14,7 +14,7 @@ router.get('/', async (req, res, next) => {
 	}
 });
 
-// GET /beaches-list/:id page.
+// GET /beaches-list   BEACH PROFILE.
 router.get('/:id', async (req, res, next) => {
 	const { id } = req.params;
 	try {

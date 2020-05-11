@@ -22,7 +22,7 @@ mongoose
 
 const events = [
 	{
-		user_id: '5eb5741d58ec0a08eb7206ce',
+		owner: '5eb5741d58ec0a08eb7206ce',
 		image: '../events/training.jpg',
 		title: 'Training day',
 		beach: 'Salou',
@@ -33,7 +33,7 @@ const events = [
 		reviews: [],
 	},
 	{
-		user_id: '5eb5741d58ec0a08eb7206cf',
+		owner: '5eb5741d58ec0a08eb7206cf',
 		image: '../events/competition.jpg',
 		title: 'Open Surf Barcelona',
 		beach: 'Barceloneta',
@@ -45,7 +45,7 @@ const events = [
 		reviews: [],
 	},
 	{
-		user_id: '5eb5741d58ec0a08eb7206d1',
+		owner: '5eb5741d58ec0a08eb7206d1',
 		image: '../events/surf-dog.jpg',
 		title: 'Surf dog day',
 		beach: 'Ocata',

@@ -3,7 +3,7 @@ const Event = require('../models/Event');
 
 const router = express.Router();
 
-// GET /events-list page.
+// GET /events-list   EVENTS LIST.
 router.get('/', async (req, res, next) => {
 	try {
 		const events = await Event.find();
@@ -14,7 +14,7 @@ router.get('/', async (req, res, next) => {
 	}
 });
 
-// GET /events-list/:id page.
+// GET /events-list   EVENT PROFILE.
 router.get('/:id', async (req, res, next) => {
 	const { id } = req.params;
 	try {
@@ -23,6 +23,60 @@ router.get('/:id', async (req, res, next) => {
 		res.status(200).json({ event });
 	} catch (err) {
 		next(console.log('Error while listing the event: ', err));
+	}
+});
+
+// POST /events-list CREATE EVENT
+router.post('/', async (req, res, next) => {
+	const { image, title, beach, date, type, description } = req.body;
+	// eslint-disable-next-line no-underscore-dangle
+	const owner = req.session.currentUser._id;
+	try {
+		const createEvent = await Event.create({
+			owner,
+			image,
+			title,
+			beach,
+			date,
+			type,
+			description,
+		});
+		res.status(201).json(createEvent);
+	} catch (err) {
+		next(console.log('Error while creating the event: ', err));
+	}
+});
+
+// PUT /events-list UPDATE EVENT
+router.put('/:id', (req, res, next) => {
+	const { id } = req.params;
+	const { image, title, beach, date, type, description } = req.body;
+	Event.findByIdAndUpdate(id, {
+		image,
+		title,
+		beach,
+		date,
+		type,
+		description,
+	})
+		.then(eventUpdated => {
+			if (eventUpdated) {
+				res.status(200).json(eventUpdated);
+			} else {
+				res.status(404).json('not found');
+			}
+		})
+		.catch(next);
+});
+
+// DELETE /events-list DELETE EVENT
+router.delete('/:id', async (req, res, next) => {
+	const { id } = req.params;
+	try {
+		const event = await Event.findByIdAndDelete(id);
+		res.status(200).json(event);
+	} catch (error) {
+		next(error);
 	}
 });
 
@@ -50,7 +104,6 @@ router.post('/:id/add-review', async (req, res, next) => {
 router.post('/:id/update/:_id', async (req, res, next) => {
 	const { id, _id } = req.params;
 	const { title, description } = req.body;
-	// eslint-disable-next-line no-underscore-dangle
 	console.log('ID OF EVENT:', id, 'ID OF REVIEW:', _id);
 	try {
 		const updateReview = await Event.update(
@@ -74,57 +127,6 @@ router.post('/:id/delete/:_id', async (req, res, next) => {
 			$pull: { reviews: { _id } },
 		});
 		res.status(200).json(deleteReview);
-	} catch (error) {
-		next(error);
-	}
-});
-
-// POST /events-list create page
-router.post('/', async (req, res, next) => {
-	const { image, title, beach, date, type, description } = req.body;
-	try {
-		const createEvent = await Event.create({
-			image,
-			title,
-			beach,
-			date,
-			type,
-			description,
-		});
-		res.status(201).json(createEvent);
-	} catch (err) {
-		next(console.log('Error while creating the event: ', err));
-	}
-});
-
-// PUT /events-list update page.
-router.put('/', (req, res, next) => {
-	const { id } = req.params;
-	const { image, title, beach, date, type, description } = req.body;
-	Event.findByIdAndUpdate(id, {
-		image,
-		title,
-		beach,
-		date,
-		type,
-		description,
-	})
-		.then(eventUpdated => {
-			if (eventUpdated) {
-				res.status(200).json(eventUpdated);
-			} else {
-				res.status(404).json('not found');
-			}
-		})
-		.catch(next);
-});
-
-// DELETE /events-list/:id delete page
-router.delete('/:id', async (req, res, next) => {
-	const { id } = req.params;
-	try {
-		const event = await Event.findByIdAndDelete(id);
-		res.status(200).json(event);
 	} catch (error) {
 		next(error);
 	}
