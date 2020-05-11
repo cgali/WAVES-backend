@@ -26,7 +26,7 @@ router.get('/:id', async (req, res, next) => {
 	}
 });
 
-// POST /beach-list add review
+// POST /beach-list   ADD REVIEW
 router.post('/:id/add-review', async (req, res, next) => {
 	const { id } = req.params;
 	const { title, description } = req.body;
@@ -46,15 +46,34 @@ router.post('/:id/add-review', async (req, res, next) => {
 	}
 });
 
-// POST /beaches-list/:id/delete/:_id  delete-review
+// POST /beaches-list   UPDATE REVIEW
+router.post('/:id/update/:_id', async (req, res, next) => {
+	const { id, _id } = req.params;
+	const { title, description } = req.body;
+	// eslint-disable-next-line no-underscore-dangle
+	console.log('ID OF EVENT:', id, 'ID OF REVIEW:', _id);
+	try {
+		const updateReview = await Beach.update(
+			{ 'reviews._id': _id },
+			{
+				$set: { 'reviews.$.title': title, 'reviews.$.description': description },
+			}
+		);
+		res.status(200).json(updateReview);
+	} catch (error) {
+		next(error);
+	}
+});
+
+// POST /beaches-list   DELETE REVIEW
 router.post('/:id/delete/:_id', async (req, res, next) => {
 	const { id, _id } = req.params;
 	console.log('ID OF EVENT:', id, 'ID OF REVIEW:', _id);
 	try {
-		const findEvent = await Beach.findByIdAndUpdate(id, {
+		const deleteReview = await Beach.findByIdAndUpdate(id, {
 			$pull: { reviews: { _id } },
 		});
-		res.status(200).json(findEvent);
+		res.status(200).json(deleteReview);
 	} catch (error) {
 		next(error);
 	}

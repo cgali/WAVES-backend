@@ -26,7 +26,7 @@ router.get('/:id', async (req, res, next) => {
 	}
 });
 
-// POST /events-list/:id/add-review
+// POST /events-list   ADD REVIEW
 router.post('/:id/add-review', async (req, res, next) => {
 	const { id } = req.params;
 	const { title, description } = req.body;
@@ -46,30 +46,34 @@ router.post('/:id/add-review', async (req, res, next) => {
 	}
 });
 
-// DELETE /events-list/:id/add-review
-// router.delete('/:id/delete/:_id', async (req, res, next) => {
-// 	const { id, _id } = req.params;
-// 	console.log('ID OF EVENT:', id, 'ID OF REVIEW:', _id);
-// 	try {
-// 		const findEvent = await Event.findById(id);
-// 		console.log(findEvent);
-// 		const deleteReview = await findEvent.reviews.pull(_id);
-// 		// Event.save();
-// 		res.status(200).json(deleteReview);
-// 	} catch (error) {
-// 		next(error);
-// 	}
-// });
+// POST /events-list   UPDATE REVIEW
+router.post('/:id/update/:_id', async (req, res, next) => {
+	const { id, _id } = req.params;
+	const { title, description } = req.body;
+	// eslint-disable-next-line no-underscore-dangle
+	console.log('ID OF EVENT:', id, 'ID OF REVIEW:', _id);
+	try {
+		const updateReview = await Event.update(
+			{ 'reviews._id': _id },
+			{
+				$set: { 'reviews.$.title': title, 'reviews.$.description': description },
+			}
+		);
+		res.status(200).json(updateReview);
+	} catch (error) {
+		next(error);
+	}
+});
 
-// POST /events-list/:id/delete/:_id  delete-review
+// POST /events-list   DELETE REVIEW
 router.post('/:id/delete/:_id', async (req, res, next) => {
 	const { id, _id } = req.params;
 	console.log('ID OF EVENT:', id, 'ID OF REVIEW:', _id);
 	try {
-		const findEvent = await Event.findByIdAndUpdate(id, {
+		const deleteReview = await Event.findByIdAndUpdate(id, {
 			$pull: { reviews: { _id } },
 		});
-		res.status(200).json(findEvent);
+		res.status(200).json(deleteReview);
 	} catch (error) {
 		next(error);
 	}
