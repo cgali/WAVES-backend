@@ -133,4 +133,39 @@ router.post('/:id/delete/:_id', async (req, res, next) => {
 	}
 });
 
+// POST /events-list   ADD/REMOVE PARTICIPANT
+router.post('/:id/participant', async (req, res, next) => {
+	const { id } = req.params;
+	const { participant } = req.body;
+	// eslint-disable-next-line no-underscore-dangle
+	const user = req.session.currentUser._id;
+	if (participant === 'true') {
+		try {
+			const addParticipant = await Event.findByIdAndUpdate(
+				id,
+				{
+					$push: { participants: user },
+				},
+				{ new: true }
+			);
+			res.status(200).json(addParticipant);
+		} catch (error) {
+			next(error);
+		}
+	} else {
+		try {
+			const removeParticipant = await Event.findByIdAndUpdate(
+				id,
+				{
+					$pull: { participants: user },
+				},
+				{ new: true }
+			);
+			res.status(200).json(removeParticipant);
+		} catch (error) {
+			next(error);
+		}
+	}
+});
+
 module.exports = router;
