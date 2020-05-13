@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-console */
 const express = require('express');
 const Event = require('../models/Event');
@@ -8,10 +9,9 @@ const router = express.Router();
 router.get('/', async (req, res, next) => {
 	try {
 		const events = await Event.find();
-		console.log('listing events', events);
 		res.status(200).json({ events });
-	} catch (err) {
-		next(console.log('Error while listing events: ', err));
+	} catch (error) {
+		next(error);
 	}
 });
 
@@ -20,17 +20,15 @@ router.get('/:id', async (req, res, next) => {
 	const { id } = req.params;
 	try {
 		const event = await Event.findById(id);
-		console.log('listing events', event);
 		res.status(200).json({ event });
-	} catch (err) {
-		next(console.log('Error while listing the event: ', err));
+	} catch (error) {
+		next(error);
 	}
 });
 
-// POST /events-list CREATE EVENT
+// POST /events-list   CREATE EVENT.
 router.post('/', async (req, res, next) => {
 	const { image, title, beach, date, type, description } = req.body;
-	// eslint-disable-next-line no-underscore-dangle
 	const owner = req.session.currentUser._id;
 	try {
 		const createEvent = await Event.create({
@@ -43,34 +41,31 @@ router.post('/', async (req, res, next) => {
 			description,
 		});
 		res.status(201).json(createEvent);
-	} catch (err) {
-		next(console.log('Error while creating the event: ', err));
+	} catch (error) {
+		next(error);
 	}
 });
 
-// PUT /events-list UPDATE EVENT
-router.put('/:id', (req, res, next) => {
+// PUT /events-list   UPDATE EVENT.
+router.put('/:id', async (req, res, next) => {
 	const { id } = req.params;
 	const { image, title, beach, date, type, description } = req.body;
-	Event.findByIdAndUpdate(id, {
-		image,
-		title,
-		beach,
-		date,
-		type,
-		description,
-	})
-		.then(eventUpdated => {
-			if (eventUpdated) {
-				res.status(200).json(eventUpdated);
-			} else {
-				res.status(404).json('not found');
-			}
-		})
-		.catch(next);
+	try {
+		const updateEvent = await Event.findByIdAndUpdate(id, {
+			image,
+			title,
+			beach,
+			date,
+			type,
+			description,
+		});
+		res.status(200).json(updateEvent);
+	} catch (error) {
+		next(error);
+	}
 });
 
-// DELETE /events-list DELETE EVENT
+// DELETE /events-list   DELETE EVENT.
 router.delete('/:id', async (req, res, next) => {
 	const { id } = req.params;
 	try {
@@ -81,11 +76,10 @@ router.delete('/:id', async (req, res, next) => {
 	}
 });
 
-// POST /events-list   ADD REVIEW
+// POST /events-list   ADD REVIEW.
 router.post('/:id/add-review', async (req, res, next) => {
 	const { id } = req.params;
 	const { title, description } = req.body;
-	// eslint-disable-next-line no-underscore-dangle
 	const owner = req.session.currentUser._id;
 	try {
 		const addReview = await Event.findByIdAndUpdate(
@@ -101,11 +95,10 @@ router.post('/:id/add-review', async (req, res, next) => {
 	}
 });
 
-// POST /events-list   UPDATE REVIEW
+// POST /events-list   UPDATE REVIEW.
 router.post('/:id/update/:_id', async (req, res, next) => {
-	const { id, _id } = req.params;
+	const { _id } = req.params;
 	const { title, description } = req.body;
-	console.log('ID OF EVENT:', id, 'ID OF REVIEW:', _id);
 	try {
 		const updateReview = await Event.update(
 			{ 'reviews._id': _id },
@@ -119,10 +112,9 @@ router.post('/:id/update/:_id', async (req, res, next) => {
 	}
 });
 
-// POST /events-list   DELETE REVIEW
+// POST /events-list   DELETE REVIEW.
 router.post('/:id/delete/:_id', async (req, res, next) => {
 	const { id, _id } = req.params;
-	console.log('ID OF EVENT:', id, 'ID OF REVIEW:', _id);
 	try {
 		const deleteReview = await Event.findByIdAndUpdate(id, {
 			$pull: { reviews: { _id } },
@@ -133,11 +125,10 @@ router.post('/:id/delete/:_id', async (req, res, next) => {
 	}
 });
 
-// POST /events-list   ADD/REMOVE PARTICIPANT
+// POST /events-list   ADD/REMOVE PARTICIPANT.
 router.post('/:id/participant', async (req, res, next) => {
 	const { id } = req.params;
 	const { participant } = req.body;
-	// eslint-disable-next-line no-underscore-dangle
 	const user = req.session.currentUser._id;
 	if (participant === 'true') {
 		try {

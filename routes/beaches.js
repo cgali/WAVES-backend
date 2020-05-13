@@ -11,8 +11,8 @@ router.get('/', async (req, res, next) => {
 		const beaches = await Beach.find();
 		console.log('listing beaches');
 		res.status(200).json({ beaches });
-	} catch (err) {
-		next(console.log('Error while listing beaches: ', err));
+	} catch (error) {
+		next(error);
 	}
 });
 
@@ -22,8 +22,8 @@ router.get('/:id', async (req, res, next) => {
 	try {
 		const beach = await Beach.findById(id);
 		res.status(200).json({ beach });
-	} catch (err) {
-		next(console.log('Error while listing the beach: ', err));
+	} catch (error) {
+		next(error);
 	}
 });
 
@@ -95,7 +95,7 @@ router.post('/:id/add-rate', async (req, res, next) => {
 	}
 });
 
-// POST /beaches-list   UPDATE REVIEW.
+// POST /beaches-list   UPDATE RATE.
 router.post('/:id/update-rate/:_id', async (req, res, next) => {
 	const { _id } = req.params;
 	const { waveRate, backgroundRate, socialEnvironmentRate } = req.body;
@@ -116,7 +116,7 @@ router.post('/:id/update-rate/:_id', async (req, res, next) => {
 	}
 });
 
-// POST /beaches-list   DELETE REVIEW.
+// POST /beaches-list   DELETE RATE.
 router.post('/:id/delete-rate/:_id', async (req, res, next) => {
 	const { id, _id } = req.params;
 	console.log('ID OF BEACHES:', id, 'ID OF RATE:', _id);
