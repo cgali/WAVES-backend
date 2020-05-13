@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 const express = require('express');
 const bcrypt = require('bcrypt');
 
@@ -9,6 +10,7 @@ const bcryptSalt = 10;
 
 const router = express.Router();
 
+// GET /whoami   WHO AM I.
 router.get('/whoami', (req, res) => {
 	if (req.session.currentUser) {
 		res.status(200).json(req.session.currentUser);
@@ -17,7 +19,7 @@ router.get('/whoami', (req, res) => {
 	}
 });
 
-// eslint-disable-next-line consistent-return
+// POST /signup   SIGN UP.
 router.post('/signup', checkUsernameAndPasswordNotEmpty, async (req, res, next) => {
 	const {
 		name,
@@ -61,7 +63,7 @@ router.post('/signup', checkUsernameAndPasswordNotEmpty, async (req, res, next) 
 	}
 });
 
-// eslint-disable-next-line consistent-return
+// POST /login   LOGIN.
 router.post('/login', checkUsernameAndPasswordNotEmpty, async (req, res, next) => {
 	const { email, password } = res.locals.auth;
 	try {
@@ -79,6 +81,7 @@ router.post('/login', checkUsernameAndPasswordNotEmpty, async (req, res, next) =
 	}
 });
 
+// GET /logout   LOGOUT.
 router.get('/logout', (req, res, next) => {
 	req.session.destroy(err => {
 		if (err) {
