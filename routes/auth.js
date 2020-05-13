@@ -19,7 +19,19 @@ router.get('/whoami', (req, res) => {
 
 // eslint-disable-next-line consistent-return
 router.post('/signup', checkUsernameAndPasswordNotEmpty, async (req, res, next) => {
-	const { email, password } = res.locals.auth;
+	const {
+		name,
+		surname,
+		email,
+		password,
+		image,
+		favoriteBoard,
+		level,
+		typeOfWaves,
+		frequentsBeaches,
+		myEvents,
+		events,
+	} = res.locals.auth;
 	try {
 		const user = await User.findOne({ email });
 		if (user) {
@@ -29,7 +41,19 @@ router.post('/signup', checkUsernameAndPasswordNotEmpty, async (req, res, next) 
 		const salt = bcrypt.genSaltSync(bcryptSalt);
 		const hashedPassword = bcrypt.hashSync(password, salt);
 
-		const newUser = await User.create({ email, hashedPassword });
+		const newUser = await User.create({
+			name,
+			surname,
+			email,
+			hashedPassword,
+			image,
+			favoriteBoard,
+			level,
+			typeOfWaves,
+			frequentsBeaches,
+			myEvents,
+			events,
+		});
 		req.session.currentUser = newUser;
 		return res.json(newUser);
 	} catch (error) {

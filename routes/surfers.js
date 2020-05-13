@@ -1,9 +1,10 @@
+/* eslint-disable no-console */
 const express = require('express');
 const User = require('../models/User');
 
 const router = express.Router();
 
-// GET /surfers-list page.
+// GET /surfers-list   LIST ALL SURFERS
 router.get('/', async (req, res, next) => {
 	try {
 		const surfers = await User.find();
@@ -14,7 +15,7 @@ router.get('/', async (req, res, next) => {
 	}
 });
 
-// GET /surfers-list/:id page.
+// GET /surfers-list/:id   SURFER PROFILE
 router.get('/:id', async (req, res, next) => {
 	const { id } = req.params;
 	try {

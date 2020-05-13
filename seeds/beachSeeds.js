@@ -28,12 +28,26 @@ const beaches = [
 		beachBackground: ['sand', 'rock'],
 		socialEnvironment: 'good',
 		description: 'Large beach with a lot of peaks. When it’s good have a strong waves with a lot of people.',
-		rate: {
-			owner: ['5eb5741d58ec0a08eb7206cf', '5eb5741d58ec0a08eb7206ce'],
-			waveRate: ['3', '4'],
-			backgroundRate: ['2', '2'],
-			socialEnvironmentRate: ['2', '3'],
-		},
+		rate: [
+			{
+				owner: '5eb5741d58ec0a08eb7206cf',
+				waveRate: 3,
+				backgroundRate: 2,
+				socialEnvironmentRate: 2,
+			},
+			{
+				owner: '5eb5741d58ec0a08eb7206ce',
+				waveRate: 4,
+				backgroundRate: 3,
+				socialEnvironmentRate: 3,
+			},
+			{
+				owner: '5eb5741d58ec0a08eb7206cc',
+				waveRate: 4,
+				backgroundRate: 4,
+				socialEnvironmentRate: 4,
+			},
+		],
 		reviews: [],
 	},
 	{
@@ -44,12 +58,20 @@ const beaches = [
 		socialEnvironment: 'poor',
 		description:
 			'A small beach with 2 peaks, almost without people. Works only in stormy days or in days of big waves.',
-		rate: {
-			owner: ['5eb5741d58ec0a08eb7206cf', '5eb5741d58ec0a08eb7206ce'],
-			waveRate: ['3', '4'],
-			backgroundRate: ['2', '2'],
-			socialEnvironmentRate: ['2', '3'],
-		},
+		rate: [
+			{
+				owner: '5eb5741d58ec0a08eb7206cf',
+				waveRate: 3,
+				backgroundRate: 2,
+				socialEnvironmentRate: 2,
+			},
+			{
+				owner: '5eb5741d58ec0a08eb7206ce',
+				waveRate: 4,
+				backgroundRate: 2,
+				socialEnvironmentRate: 3,
+			},
+		],
 		reviews: [],
 	},
 	{
@@ -60,12 +82,20 @@ const beaches = [
 		socialEnvironment: 'good',
 		description:
 			'A small beach with the harbor rocks at one side and large waves. In stormy days it`s one of the best places. Possibility of throwing you to the water at the final of rocks without almost paddleling.',
-		rate: {
-			owner: ['5eb5741d58ec0a08eb7206cf', '5eb5741d58ec0a08eb7206ce'],
-			waveRate: ['3', '4'],
-			backgroundRate: ['2', '2'],
-			socialEnvironmentRate: ['2', '3'],
-		},
+		rate: [
+			{
+				owner: '5eb5741d58ec0a08eb7206cf',
+				waveRate: 3,
+				backgroundRate: 2,
+				socialEnvironmentRate: 2,
+			},
+			{
+				owner: '5eb5741d58ec0a08eb7206ce',
+				waveRate: 4,
+				backgroundRate: 2,
+				socialEnvironmentRate: 3,
+			},
+		],
 		reviews: [],
 	},
 	{
@@ -76,12 +106,20 @@ const beaches = [
 		socialEnvironment: 'poor',
 		description:
 			'A small beach with rocks at both sides, difficult to entry and arrive at the wave peaks. Short and strong waves.',
-		rate: {
-			owner: ['5eb5741d58ec0a08eb7206cf', '5eb5741d58ec0a08eb7206ce'],
-			waveRate: ['3', '4'],
-			backgroundRate: ['2', '2'],
-			socialEnvironmentRate: ['2', '3'],
-		},
+		rate: [
+			{
+				owner: '5eb5741d58ec0a08eb7206cf',
+				waveRate: 3,
+				backgroundRate: 2,
+				socialEnvironmentRate: 2,
+			},
+			{
+				owner: '5eb5741d58ec0a08eb7206ce',
+				waveRate: 4,
+				backgroundRate: 2,
+				socialEnvironmentRate: 3,
+			},
+		],
 		reviews: [],
 	},
 	{
@@ -92,12 +130,20 @@ const beaches = [
 		socialEnvironment: 'normal',
 		description:
 			'A large beach with many waves peaks. Strong waves and powerful. At some waves peaks, you could find rocks in the background.',
-		rate: {
-			owner: ['5eb5741d58ec0a08eb7206cf', '5eb5741d58ec0a08eb7206ce'],
-			waveRate: ['3', '4'],
-			backgroundRate: ['2', '2'],
-			socialEnvironmentRate: ['2', '3'],
-		},
+		rate: [
+			{
+				owner: '5eb5741d58ec0a08eb7206cf',
+				waveRate: 3,
+				backgroundRate: 2,
+				socialEnvironmentRate: 2,
+			},
+			{
+				owner: '5eb5741d58ec0a08eb7206ce',
+				waveRate: 4,
+				backgroundRate: 2,
+				socialEnvironmentRate: 3,
+			},
+		],
 		reviews: [],
 	},
 	{
@@ -108,12 +154,20 @@ const beaches = [
 		socialEnvironment: 'normal',
 		description:
 			'Beach localized in a creek behind the forest. It is difficult to access but when it works it is really nice to be there surfing waves.',
-		rate: {
-			owner: ['5eb5741d58ec0a08eb7206cf', '5eb5741d58ec0a08eb7206ce'],
-			waveRate: ['3', '4'],
-			backgroundRate: ['2', '2'],
-			socialEnvironmentRate: ['2', '3'],
-		},
+		rate: [
+			{
+				owner: '5eb5741d58ec0a08eb7206cf',
+				waveRate: 3,
+				backgroundRate: 2,
+				socialEnvironmentRate: 2,
+			},
+			{
+				owner: '5eb5741d58ec0a08eb7206ce',
+				waveRate: 4,
+				backgroundRate: 2,
+				socialEnvironmentRate: 3,
+			},
+		],
 		reviews: [],
 	},
 	{
@@ -124,12 +178,20 @@ const beaches = [
 		socialEnvironment: 'normal',
 		description:
 			'Near Cap de Salou and the harbor of Tarragona, is one of the most popular places to go surfing in Costa Daurada. Open to the sea, always receive the swell directly, so maybe it is difficult to arrive at the wave peak when it is a stormy day.',
-		rate: {
-			owner: ['5eb5741d58ec0a08eb7206cf', '5eb5741d58ec0a08eb7206ce'],
-			waveRate: ['3', '4'],
-			backgroundRate: ['2', '2'],
-			socialEnvironmentRate: ['2', '3'],
-		},
+		rate: [
+			{
+				owner: '5eb5741d58ec0a08eb7206cf',
+				waveRate: 3,
+				backgroundRate: 2,
+				socialEnvironmentRate: 2,
+			},
+			{
+				owner: '5eb5741d58ec0a08eb7206ce',
+				waveRate: 4,
+				backgroundRate: 2,
+				socialEnvironmentRate: 3,
+			},
+		],
 		reviews: [],
 	},
 	{
@@ -140,12 +202,20 @@ const beaches = [
 		socialEnvironment: 'good',
 		description:
 			'The beach is very large with a lot of waves peaks. Also, you can see at the promenade the surfers at the water. So it is one of the most crowded places to enjoy seeing people surfing and take photos.',
-		rate: {
-			owner: ['5eb5741d58ec0a08eb7206cf', '5eb5741d58ec0a08eb7206ce'],
-			waveRate: ['3', '4'],
-			backgroundRate: ['2', '2'],
-			socialEnvironmentRate: ['2', '3'],
-		},
+		rate: [
+			{
+				owner: '5eb5741d58ec0a08eb7206cf',
+				waveRate: 3,
+				backgroundRate: 2,
+				socialEnvironmentRate: 2,
+			},
+			{
+				owner: '5eb5741d58ec0a08eb7206ce',
+				waveRate: 4,
+				backgroundRate: 2,
+				socialEnvironmentRate: 3,
+			},
+		],
 		reviews: [],
 	},
 	{
@@ -156,12 +226,20 @@ const beaches = [
 		socialEnvironment: 'normal',
 		description:
 			'It is the typical fishing beach. With rocks at one side and in the background. In the past fishers used it to throw their boats. Now is a beach for users. The waves aren`t too heavy but with a bad fall, you can break your board.',
-		rate: {
-			owner: ['5eb5741d58ec0a08eb7206cf', '5eb5741d58ec0a08eb7206ce'],
-			waveRate: ['3', '4'],
-			backgroundRate: ['2', '2'],
-			socialEnvironmentRate: ['2', '3'],
-		},
+		rate: [
+			{
+				owner: '5eb5741d58ec0a08eb7206cf',
+				waveRate: 3,
+				backgroundRate: 2,
+				socialEnvironmentRate: 2,
+			},
+			{
+				owner: '5eb5741d58ec0a08eb7206ce',
+				waveRate: 4,
+				backgroundRate: 2,
+				socialEnvironmentRate: 3,
+			},
+		],
 		reviews: [],
 	},
 ];

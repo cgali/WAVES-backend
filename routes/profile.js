@@ -1,39 +1,27 @@
+/* eslint-disable no-console */
 const express = require('express');
 const User = require('../models/User');
 
 const router = express.Router();
 
-// GET /profile page.
-router.get('/profile', async (req, res, next) => {
+// GET /profile PROFILE INFO.
+router.get('/', async (req, res, next) => {
 	try {
-		const profile = await User.find();
-		console.log('listing profile');
-		res.status(200).json({ profile });
+		res.status(200).json(req.session.currentUser);
 	} catch (err) {
 		next(console.log('Error while listing profile: ', err));
 	}
 });
 
-router.put('/profile', (req, res, next) => {
-	const { id } = req.params;
-	const { name, surname, image, favoriteBoard, level, typeOfWaves, frequentsBeaches } = req.body;
-	User.findByIdAndUpdate(id, {
-		name,
-		surname,
-		image,
-		favoriteBoard,
-		level,
-		typeOfWaves,
-		frequentsBeaches,
-	})
-		.then(profileUpdated => {
-			if (profileUpdated) {
-				res.json(profileUpdated);
-			} else {
-				res.status(404).json('not found');
-			}
-		})
-		.catch(next);
+// PUT /profile   UPDATE PROFILE.
+router.put('/', async (req, res, next) => {
+	const { _id: id } = req.session.currentUser;
+	try {
+		const updateProfile = await User.findByIdAndUpdate(id, req.body, { new: true });
+		res.status(200).json(updateProfile);
+	} catch (error) {
+		next(error);
+	}
 });
 
 module.exports = router;
