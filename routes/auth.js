@@ -83,9 +83,9 @@ router.post('/login', checkUsernameAndPasswordNotEmpty, async (req, res, next) =
 
 // GET /logout   LOGOUT.
 router.get('/logout', (req, res, next) => {
-	req.session.destroy(err => {
-		if (err) {
-			next(err);
+	req.session.destroy(error => {
+		if (error) {
+			next(error);
 		}
 		return res.status(204).send();
 	});
