@@ -5,8 +5,8 @@ const { Schema } = mongoose;
 const reviewSchema = new Schema(
 	{
 		owner: { type: Schema.Types.ObjectId, ref: 'User' },
-		title: { type: String },
-		description: { type: String },
+		reviewTitle: { type: String },
+		reviewDescription: { type: String },
 	},
 
 	{

@@ -18,6 +18,7 @@ router.put('/', async (req, res, next) => {
 	const { _id: id } = req.session.currentUser;
 	try {
 		const updateProfile = await User.findByIdAndUpdate(id, req.body, { new: true });
+		req.session.currentUser = updateProfile;
 		res.status(200).json(updateProfile);
 	} catch (error) {
 		next(error);

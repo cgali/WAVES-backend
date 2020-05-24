@@ -19,7 +19,10 @@ router.get('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
 	const { id } = req.params;
 	try {
-		const event = await Event.findById(id).populate({ path: 'participants' });
+		const event = await Event.findById(id)
+			.populate({ path: 'participants' })
+			.populate({ path: 'owner' })
+			.populate('reviews.owner');
 		res.status(200).json({ event });
 	} catch (error) {
 		next(error);
@@ -79,13 +82,13 @@ router.delete('/:id', async (req, res, next) => {
 // POST /events-list   ADD REVIEW.
 router.post('/:id/add-review', async (req, res, next) => {
 	const { id } = req.params;
-	const { title, description } = req.body;
+	const { reviewTitle, reviewDescription } = req.body;
 	const owner = req.session.currentUser._id;
 	try {
 		const addReview = await Event.findByIdAndUpdate(
 			id,
 			{
-				$push: { reviews: { owner, title, description } },
+				$push: { reviews: { owner, reviewTitle, reviewDescription } },
 			},
 			{ new: true }
 		);
@@ -113,7 +116,7 @@ router.post('/:id/update/:_id', async (req, res, next) => {
 });
 
 // POST /events-list   DELETE REVIEW.
-router.post('/:id/delete/:_id', async (req, res, next) => {
+router.post('/:id/delete-review/:_id', async (req, res, next) => {
 	const { id, _id } = req.params;
 	try {
 		const deleteReview = await Event.findByIdAndUpdate(id, {
@@ -127,13 +130,13 @@ router.post('/:id/delete/:_id', async (req, res, next) => {
 
 // POST /events-list   ADD/REMOVE PARTICIPANT.
 router.post('/:id/participant', async (req, res, next) => {
-	const { id } = req.params;
+	const { id: eventId } = req.params;
 	const { participant } = req.body;
 	const user = req.session.currentUser._id;
 	if (participant === 'true') {
 		try {
 			const addParticipant = await Event.findByIdAndUpdate(
-				id,
+				eventId,
 				{
 					$push: { participants: user },
 				},
@@ -146,7 +149,7 @@ router.post('/:id/participant', async (req, res, next) => {
 	} else {
 		try {
 			const removeParticipant = await Event.findByIdAndUpdate(
-				id,
+				eventId,
 				{
 					$pull: { participants: user },
 				},

@@ -21,19 +21,7 @@ router.get('/whoami', (req, res) => {
 
 // POST /signup   SIGN UP.
 router.post('/signup', checkUsernameAndPasswordNotEmpty, async (req, res, next) => {
-	const {
-		name,
-		surname,
-		email,
-		password,
-		image,
-		favoriteBoard,
-		level,
-		typeOfWaves,
-		frequentsBeaches,
-		myEvents,
-		events,
-	} = res.locals.auth;
+	const { name, surname, email, password } = res.locals.auth;
 	try {
 		const user = await User.findOne({ email });
 		if (user) {
@@ -48,13 +36,6 @@ router.post('/signup', checkUsernameAndPasswordNotEmpty, async (req, res, next) 
 			surname,
 			email,
 			hashedPassword,
-			image,
-			favoriteBoard,
-			level,
-			typeOfWaves,
-			frequentsBeaches,
-			myEvents,
-			events,
 		});
 		req.session.currentUser = newUser;
 		return res.json(newUser);
