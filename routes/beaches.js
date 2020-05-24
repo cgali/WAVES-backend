@@ -20,7 +20,7 @@ router.get('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
 	const { id } = req.params;
 	try {
-		const beach = await Beach.findById(id);
+		const beach = await Beach.findById(id).populate('reviews.owner');
 		res.status(200).json({ beach });
 	} catch (error) {
 		next(error);
@@ -30,13 +30,13 @@ router.get('/:id', async (req, res, next) => {
 // POST /beaches-list   ADD REVIEW.
 router.post('/:id/add-review', async (req, res, next) => {
 	const { id } = req.params;
-	const { title, description } = req.body;
+	const { reviewTitle, reviewDescription } = req.body;
 	const owner = req.session.currentUser._id;
 	try {
 		const addReview = await Beach.findByIdAndUpdate(
 			id,
 			{
-				$push: { reviews: { owner, title, description } },
+				$push: { reviews: { owner, reviewTitle, reviewDescription } },
 			},
 			{ new: true }
 		);
@@ -49,12 +49,12 @@ router.post('/:id/add-review', async (req, res, next) => {
 // POST /beaches-list   UPDATE REVIEW.
 router.post('/:id/update-review/:_id', async (req, res, next) => {
 	const { _id } = req.params;
-	const { title, description } = req.body;
+	const { reviewTitle, reviewDescription } = req.body;
 	try {
 		const updateReview = await Beach.update(
 			{ 'reviews._id': _id },
 			{
-				$set: { 'reviews.$.title': title, 'reviews.$.description': description },
+				$set: { 'reviews.$.title': reviewTitle, 'reviews.$.description': reviewDescription },
 			}
 		);
 		res.status(200).json(updateReview);

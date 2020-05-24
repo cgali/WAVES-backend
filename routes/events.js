@@ -101,12 +101,12 @@ router.post('/:id/add-review', async (req, res, next) => {
 // POST /events-list   UPDATE REVIEW.
 router.post('/:id/update/:_id', async (req, res, next) => {
 	const { _id } = req.params;
-	const { title, description } = req.body;
+	const { reviewTitle, reviewDescription } = req.body;
 	try {
 		const updateReview = await Event.update(
 			{ 'reviews._id': _id },
 			{
-				$set: { 'reviews.$.title': title, 'reviews.$.description': description },
+				$set: { 'reviews.$.title': reviewTitle, 'reviews.$.description': reviewDescription },
 			}
 		);
 		res.status(200).json(updateReview);
