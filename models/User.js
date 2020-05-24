@@ -18,7 +18,7 @@ const userSchema = new Schema(
 		typeOfWaves: { type: Array },
 		frequentsBeaches: { type: Array },
 		myEvents: { type: Array },
-		events: { type: Array },
+		events: [{ type: Schema.Types.ObjectId, ref: 'Event' }],
 	},
 
 	{
