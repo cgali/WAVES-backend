@@ -15,6 +15,32 @@ router.get('/', async (req, res, next) => {
 	}
 });
 
+// GET /events-list/participants   EVENTS PARTICIPANTS.
+router.get('/participants', async (req, res, next) => {
+	const user = req.session.currentUser._id;
+	try {
+		const events = await Event.find({
+			participants: user,
+		});
+		res.status(200).json({ events });
+	} catch (error) {
+		next(error);
+	}
+});
+
+// GET /events-list/owner   EVENTS OWNER.
+router.get('/owner', async (req, res, next) => {
+	const user = req.session.currentUser._id;
+	try {
+		const events = await Event.find({
+			owner: user,
+		});
+		res.status(200).json({ events });
+	} catch (error) {
+		next(error);
+	}
+});
+
 // GET /events-list   EVENT PROFILE.
 router.get('/:id', async (req, res, next) => {
 	const { id } = req.params;
