@@ -39,7 +39,7 @@ router.post('/:id/add-review', async (req, res, next) => {
 				$push: { reviews: { owner, reviewTitle, reviewDescription } },
 			},
 			{ new: true }
-		);
+		).populate('reviews.owner');
 		res.status(200).json(addReview);
 	} catch (error) {
 		next(error);
@@ -55,8 +55,9 @@ router.post('/:id/update-review/:_id', async (req, res, next) => {
 			{ 'reviews._id': _id },
 			{
 				$set: { 'reviews.$.title': reviewTitle, 'reviews.$.description': reviewDescription },
-			}
-		);
+			},
+			{ new: true }
+		).populate('reviews.owner');
 		res.status(200).json(updateReview);
 	} catch (error) {
 		next(error);
@@ -67,9 +68,13 @@ router.post('/:id/update-review/:_id', async (req, res, next) => {
 router.post('/:id/delete-review/:_id', async (req, res, next) => {
 	const { id, _id } = req.params;
 	try {
-		const deleteReview = await Beach.findByIdAndUpdate(id, {
-			$pull: { reviews: { _id } },
-		});
+		const deleteReview = await Beach.findByIdAndUpdate(
+			id,
+			{
+				$pull: { reviews: { _id } },
+			},
+			{ new: true }
+		).populate('reviews.owner');
 		res.status(200).json(deleteReview);
 	} catch (error) {
 		next(error);
@@ -121,9 +126,13 @@ router.post('/:id/delete-rate/:_id', async (req, res, next) => {
 	const { id, _id } = req.params;
 	console.log('ID OF BEACHES:', id, 'ID OF RATE:', _id);
 	try {
-		const deleteRate = await Beach.findByIdAndUpdate(id, {
-			$pull: { rate: { _id } },
-		});
+		const deleteRate = await Beach.findByIdAndUpdate(
+			id,
+			{
+				$pull: { rate: { _id } },
+			},
+			{ new: true }
+		);
 		res.status(200).json(deleteRate);
 	} catch (error) {
 		next(error);
