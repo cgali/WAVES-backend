@@ -109,14 +109,18 @@ router.put('/:id', async (req, res, next) => {
 	const { id } = req.params;
 	const { image, title, beach, date, type, description } = req.body;
 	try {
-		const updateEvent = await Event.findByIdAndUpdate(id, {
-			image,
-			title,
-			beach,
-			date,
-			type,
-			description,
-		});
+		const updateEvent = await Event.findByIdAndUpdate(
+			id,
+			{
+				image,
+				title,
+				beach,
+				date,
+				type,
+				description,
+			},
+			{ new: true }
+		);
 		res.status(200).json(updateEvent);
 	} catch (error) {
 		next(error);

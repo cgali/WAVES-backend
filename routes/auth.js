@@ -21,7 +21,7 @@ router.get('/whoami', (req, res) => {
 
 // POST /signup   SIGN UP.
 router.post('/signup', checkUsernameAndPasswordNotEmpty, async (req, res, next) => {
-	const { name, surname, email, password } = res.locals.auth;
+	const { image, name, surname, email, password } = res.locals.auth;
 	try {
 		const user = await User.findOne({ email });
 		if (user) {
@@ -32,6 +32,7 @@ router.post('/signup', checkUsernameAndPasswordNotEmpty, async (req, res, next) 
 		const hashedPassword = bcrypt.hashSync(password, salt);
 
 		const newUser = await User.create({
+			image,
 			name,
 			surname,
 			email,
