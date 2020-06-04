@@ -157,24 +157,6 @@ router.post('/:id/add-review', async (req, res, next) => {
 	}
 });
 
-// POST /events-list   UPDATE REVIEW.
-router.post('/:id/update/:_id', async (req, res, next) => {
-	const { _id } = req.params;
-	const { reviewTitle, reviewDescription } = req.body;
-	try {
-		const updateReview = await Event.update(
-			{ 'reviews._id': _id },
-			{
-				$set: { 'reviews.$.title': reviewTitle, 'reviews.$.description': reviewDescription },
-			},
-			{ new: true }
-		).populate('reviews.owner');
-		res.status(200).json(updateReview);
-	} catch (error) {
-		next(error);
-	}
-});
-
 // POST /events-list   DELETE REVIEW.
 router.post('/:id/delete-review/:_id', async (req, res, next) => {
 	const { id, _id } = req.params;
@@ -227,39 +209,5 @@ router.post('/:id/remove-participant', async (req, res, next) => {
 		next(error);
 	}
 });
-
-// // POST /events-list   ADD/REMOVE PARTICIPANT.
-// router.post('/:id/participant', async (req, res, next) => {
-// 	const { id: eventId } = req.params;
-// 	const { participant } = req.body;
-// 	const user = req.session.currentUser._id;
-// 	if (participant === 'true') {
-// 		try {
-// 			const addParticipant = await Event.findByIdAndUpdate(
-// 				eventId,
-// 				{
-// 					$push: { participants: user },
-// 				},
-// 				{ new: true }
-// 			);
-// 			res.status(200).json(addParticipant);
-// 		} catch (error) {
-// 			next(error);
-// 		}
-// 	} else {
-// 		try {
-// 			const removeParticipant = await Event.findByIdAndUpdate(
-// 				eventId,
-// 				{
-// 					$pull: { participants: user },
-// 				},
-// 				{ new: true }
-// 			);
-// 			res.status(200).json(removeParticipant);
-// 		} catch (error) {
-// 			next(error);
-// 		}
-// 	}
-// });
 
 module.exports = router;

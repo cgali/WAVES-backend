@@ -14,7 +14,6 @@ const eventSchema = new Schema(
 		},
 		beach: { type: String, required: true },
 		date: { type: Date },
-		type: { type: String },
 		description: { type: String },
 		participants: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 		reviews: [reviewSchema],

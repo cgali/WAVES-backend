@@ -46,24 +46,6 @@ router.post('/:id/add-review', async (req, res, next) => {
 	}
 });
 
-// POST /beaches-list   UPDATE REVIEW.
-router.post('/:id/update-review/:_id', async (req, res, next) => {
-	const { _id } = req.params;
-	const { reviewTitle, reviewDescription } = req.body;
-	try {
-		const updateReview = await Beach.update(
-			{ 'reviews._id': _id },
-			{
-				$set: { 'reviews.$.title': reviewTitle, 'reviews.$.description': reviewDescription },
-			},
-			{ new: true }
-		).populate('reviews.owner');
-		res.status(200).json(updateReview);
-	} catch (error) {
-		next(error);
-	}
-});
-
 // POST /beaches-list   DELETE REVIEW.
 router.post('/:id/delete-review/:_id', async (req, res, next) => {
 	const { id, _id } = req.params;
@@ -95,27 +77,6 @@ router.post('/:id/add-rate', async (req, res, next) => {
 			{ new: true }
 		);
 		res.status(200).json(addRate);
-	} catch (error) {
-		next(error);
-	}
-});
-
-// POST /beaches-list   UPDATE RATE.
-router.post('/:id/update-rate/:_id', async (req, res, next) => {
-	const { _id } = req.params;
-	const { waveRate, backgroundRate, socialEnvironmentRate } = req.body;
-	try {
-		const updateRate = await Beach.update(
-			{ 'rate._id': _id },
-			{
-				$set: {
-					'rate.$.waveRate': waveRate,
-					'rate.$.backgroundRate': backgroundRate,
-					'rate.$.socialEnvironmentRate': socialEnvironmentRate,
-				},
-			}
-		);
-		res.status(200).json(updateRate);
 	} catch (error) {
 		next(error);
 	}

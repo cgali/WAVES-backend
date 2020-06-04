@@ -30,7 +30,6 @@ const surfersRouter = require('./routes/surfers');
 const profileRouter = require('./routes/profile');
 const beachesRouter = require('./routes/beaches');
 const eventsRouter = require('./routes/events');
-const demoRouter = require('./routes/demo');
 
 const app = express();
 
@@ -62,7 +61,6 @@ app.use(
 );
 
 app.use('/', authRouter);
-app.use('/protected', demoRouter);
 app.use('/surfers-list', surfersRouter);
 app.use('/profile', profileRouter);
 app.use('/beaches-list', beachesRouter);
