@@ -172,7 +172,7 @@ const beaches = [
 	},
 	{
 		name: 'Salou',
-		image: '../beaches/palamos.jpg',
+		image: '../beaches/salou.jpg',
 		typesOfWaves: ['small', 'medium'],
 		beachBackground: ['sand'],
 		socialEnvironment: 'normal',

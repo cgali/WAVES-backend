@@ -26,7 +26,7 @@ router.put('/', async (req, res, next) => {
 });
 
 // DELETE /profile   DELETE PROFILE.
-router.delete('/', async (req, res, next) => {
+router.delete('/delete', async (req, res, next) => {
 	const { _id: id } = req.session.currentUser;
 	try {
 		const profile = await User.findByIdAndDelete(id);
