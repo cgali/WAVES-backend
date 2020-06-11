@@ -40,11 +40,6 @@ I'm always searching for the conditions of waves and seeing a lot of app I'm the
 
 ## *_ROUTES Backend:_*
 
-### *Endpoints*
-| Method | Path         | Description     | Body |
-| :----: | ------------ | --------------- | ---- |
-|  GET   | `/protected` | Protected route |      |
-
 ### *Authentication endpoints*
 | Method | Path      | Description    | Body                     |
 | :----: | --------- | -------------- | ------------------------ |
@@ -71,7 +66,8 @@ I'm always searching for the conditions of waves and seeing a lot of app I'm the
 |  GET   | `/events-list` | Obtain all the events       |  |
 |  GET  | `/events-list/:id` | Obtain specific info of an event  |  |
 |  POST  | `/events-list`  | Create new event   | `{ title, image, description, beach, owner, date }` |
-|  PUT   | `/events-list/:id` | Update an event | `{ title, image, description, beach, owner, date }` |
+|  POST  | `/events-list/:id/add-participant`  | Add new participant   |  |
+|  POST  | `/events-list/:id/remove-participant`  | Delete participant   |  |
 |  DELETE   | `/events-list/:id` | Delete an event |                          |
 
 ### *Reviews endpoints*
@@ -79,7 +75,6 @@ I'm always searching for the conditions of waves and seeing a lot of app I'm the
 | :----: | --------- | -------------- | ------------------------ |
 |  GET   | `/review-list` | Obtain all the reviews       |  |
 |  POST   | `/review-list ` | Add a review      |  |
-|  PUT   | `/review-list/:id` | Update a review     |  |
 |  DELETE  | `/review-list/:id` | Delete a review |  |
 
 ### *Beach endpoints*
@@ -97,10 +92,7 @@ I'm always searching for the conditions of waves and seeing a lot of app I'm the
 	email: String;
 	username: String;
 	level: String;
-  	board: {
-		type: String;
-		size: String;
-	},
+  	board: String;
 	typesOfWaves: Array;
 	frequentsBeaches: Array;
 	timestamps: {
@@ -168,11 +160,11 @@ I'm always searching for the conditions of waves and seeing a lot of app I'm the
 ### *Git*
 The url to the repository and to the deployed project.
 
-https://github.com/cgali/WAVES-frontend
-https://github.com/cgali/WAVES-backend
+Frontend: https://github.com/cgali/WAVES-frontend
+Backend: https://github.com/cgali/WAVES-backend
 
 ### *Deploy link*
 (https://waves-project-app.herokuapp.com/)
 
 ### *Slides*
-[Slides Link](http://slides.com/)
+[Slides Link](https://slides.com/carlesgali/deck-bb83ca)
