@@ -36,7 +36,7 @@ const app = express();
 app.use(
 	cors({
 		credentials: true,
-		header: ('Access-Control-Allow-Origin', '*'),
+		header: { 'Access-Control-Allow-Origin': '*' },
 		origin: [process.env.FRONTEND_DOMAIN, process.env.FRONTEND_DEPLOY],
 	})
 );
